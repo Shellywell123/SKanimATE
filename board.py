@@ -60,7 +60,7 @@ class PyBoard:
         ##################
 
         x = np.arange(-self.board_width  /2,(self.board_width  +1)/2,2)
-        y = np.arange(-self.board_mid_length/2,(self.board_mid_length+1)/2,1)
+        y = np.arange(-self.board_mid_length/2,(self.board_mid_length+1)/2,self.board_mid_length)
 
         x,y = np.meshgrid(x,y)
 
@@ -139,6 +139,39 @@ class PyBoard:
 	        trucks.append(truck_axel)
 
         return trucks
+
+    ######################################################################################
+
+    def use_test_bolts(self):
+    	"""
+    	bolts development
+    	"""
+    	bolts = []
+    	bolt={'x' : 2, 'y':-1+self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : 2, 'y':1+self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : -2, 'y':-1+self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : -2, 'y':1+self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : 2, 'y':-1+-self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : 2, 'y':1+-self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : -2, 'y':-1+-self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	bolt={'x' : -2, 'y':1+-self.truck_position/2,'z':1.5}
+    	bolts.append(bolt)
+
+    	return bolts
 
 ################################################################################
 # End of class

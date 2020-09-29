@@ -40,9 +40,17 @@ class PyAnimate:
         """
         """ 
         i = 1
-        for theta_h in list(np.linspace(0,180,num_of_frames)):
-            
-            self.sb.customflip('Ollie',0,0,0,theta_h=theta_h)
+
+        d_theta_r1 = list(np.linspace(0,180,(num_of_frames+1)/2))
+        d_theta_r2 = list(np.zeros(num_of_frames-len(d_theta_r1)))
+        d_theta_r3 = d_theta_r1+d_theta_r2
+
+        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+
+            self.sb.customflip('Ollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r)
 
             if i <= 9:
                 name_i = '0'+str(i)

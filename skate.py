@@ -38,23 +38,36 @@ class PySkate():
         ax.set_xlabel('x')
         ax.set_ylabel('y')
         ax.set_zlabel('z')
+
+        ax.set_facecolor('white')
+        ax.w_xaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
+        ax.w_yaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
+        ax.w_zaxis.set_pane_color((0.4, 0.4, 0.4, 1.0))
+
         return ax
 
     ######################################################################################
 
-    def post_trick(self,ax,board=None,wheels=None,trucks=None):
+    def post_trick(self,ax,board=None,wheels=None,trucks=None,bolts=None):
         """
         plot results of transformaition
         """
         max_lim = 15
         min_lim = -max_lim
 
+        if bolts:
+            for bolt in bolts:
+                x = bolt['x']
+                y = bolt['y']
+                z = bolt['z']
+                ax.scatter(x,y,z+5,zorder=1,alpha=1,color='blue')                
+
         if wheels:
             for wheel in wheels:
                 x = wheel['x']
                 y = wheel['y']
                 z = wheel['z']
-                ax.plot_surface(x,y,z,zorder=1,alpha=1,color='yellow')
+                ax.plot_surface(x,y,z,zorder=1,alpha=1,color='lime')
 
         if trucks:
             for trucks_part in trucks:
@@ -68,15 +81,16 @@ class PySkate():
                 x = board_part['x']
                 y = board_part['y']
                 z = board_part['z']
-                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='r')
-        
+                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='burlywood')
+              #  ax.plot_surface(x,y,z+1,zorder=3,alpha=1,color='black')
+
         ax.auto_scale_xyz([min_lim, max_lim],
                     [min_lim, max_lim], 
                     [0, 2*max_lim])   
 
     ######################################################################################
 
-    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h):
+    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r):
         """
         heavy duty function for computing a boards orientation
         """
@@ -99,10 +113,28 @@ class PySkate():
             if dtheta_x != 0:
                 Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
             if theta_h != 0:
-                Bx,By,Bz = tf.ollie_motion(Bx,By,Bz,theta_h)
+                Bx,By,Bz = tf.ollie_motion(Bx,By,Bz,theta_h,theta_r)
 
             board_part = {'x':Bx,'y':By,'z':Bz}
             board.append(board_part)
+
+        # bolts_ = b.use_test_bolts()
+        # bolts = []
+
+        # for bolt in bolts_:
+        #     bx = bolt['x']
+        #     by = bolt['y']
+        #     bz = bolt['z']
+        #     if dtheta_y != 0:
+        #         bx,by,bz = tf.y_clockwise(bx,by,bz,dtheta_y)
+        #     if dtheta_z != 0:
+        #         bx,by,bz = tf.z_clockwise(bx,by,bz,dtheta_z)
+        #     if dtheta_x != 0:
+        #         bx,by,bz = tf.x_clockwise(bx,by,bz,dtheta_x)
+        #     if theta_h != 0:
+        #         bx,by,bz = tf.ollie_motion(bx,by,bz,theta_h,theta_r)
+        #     bolt = {'x':bx,'y':by,'z':bz}
+        #     bolts.append(bolt)
 
         trucks_ = b.use_test_trucks()
         trucks = []
@@ -118,7 +150,7 @@ class PySkate():
             if dtheta_x != 0:
                 Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
             if theta_h != 0:
-                Tx,Ty,Tz = tf.ollie_motion(Tx,Ty,Tz,theta_h)
+                Tx,Ty,Tz = tf.ollie_motion(Tx,Ty,Tz,theta_h,theta_r)
             truck_part = {'x':Tx,'y':Ty,'z':Tz}
             trucks.append(truck_part)
 
@@ -136,7 +168,7 @@ class PySkate():
             if dtheta_x != 0:
                 Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
             if theta_h != 0:
-                Wx,Wy,Wz = tf.ollie_motion(Wx,Wy,Wz,theta_h)
+                Wx,Wy,Wz = tf.ollie_motion(Wx,Wy,Wz,theta_h,theta_r)
             wheel = {'x':Wx,'y':Wy,'z':Wz}
             wheels.append(wheel)
             
