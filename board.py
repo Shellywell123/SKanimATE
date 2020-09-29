@@ -12,24 +12,26 @@ class PyBoard:
         """
         class initaliser
         """
-        self.board_width  =8
-        self.board_mid_length =22
+        # deck dimensions
+        self.board_width            = 8
+        self.board_mid_length       = 22
         self.board_nose_tail_length = 5
 
-        self.wheel_radius = 1
-        self.truck_height = 1
-
-        self.wheel_width    = 2
+        # truck dimensions
         self.truck_width    = 6
-        self.truck_position = 18 #/board_length
-        self.axel_radius   = 0.2
-       # print(' PyBoard initalised '+self.ss.get_live_time())
-      #  print('#'*55)
+        self.truck_position = 18 #/board_length(32)
+        self.axel_radius    = 0.2
+        self.truck_height   = 1
+
+        # wheel dimensions
+        self.wheel_radius = 1
+        self.wheel_width  = 2
 
     ######################################################################################
 
     def use_test_board(self):
         """
+        deck development
         """
 
         board = []
@@ -97,6 +99,7 @@ class PyBoard:
 
     def use_test_wheels(self):
         """
+        wheels development
         """
 
         wheels = []
@@ -119,6 +122,7 @@ class PyBoard:
 
     def use_test_trucks(self):
         """
+        trucks development
         """
 
         trucks = []
