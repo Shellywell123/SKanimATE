@@ -17,6 +17,17 @@ b = PyBoard()
 
 class PySkate():
 
+    def __init__(self):
+        """
+        class initaliser
+        """
+
+       # print('#'*55)
+       # print(' PySkate initalised '+self.ss.get_live_time())
+      #  print('#'*55)
+
+    ######################################################################################
+
     def pre_trick(self):
         """
         load in components before tranformations happen
@@ -29,282 +40,41 @@ class PySkate():
         ax.set_zlabel('z')
         return ax
 
-    def post_trick(self,ax,board,wheels=None):
+    ######################################################################################
+
+    def post_trick(self,ax,board=None,wheels=None,trucks=None):
         """
         plot results of transformaition
         """
-        max_lim = 20
+        max_lim = 17
         min_lim = -max_lim
 
-
-        if board:
-            x = board['x']
-            y = board['y']
-            z = board['z']
-            ax.plot_surface(x,y,z)
-        
         if wheels:
             for wheel in wheels:
                 x = wheel['x']
                 y = wheel['y']
                 z = wheel['z']
-                ax.plot_surface(x,y,z)
+                ax.plot_surface(x,y,z,zorder=1,alpha=1,color='yellow')
 
+        if trucks:
+            for trucks_part in trucks:
+                x = trucks_part['x']
+                y = trucks_part['y']
+                z = trucks_part['z']
+                ax.plot_surface(x,y,z,zorder=2,alpha=1,color='blue')
+
+        if board:
+            for board_part in board:
+                x = board_part['x']
+                y = board_part['y']
+                z = board_part['z']
+                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='r')
+        
         ax.auto_scale_xyz([min_lim, max_lim],
                     [min_lim, max_lim], 
-                    [min_lim, max_lim])
+                    [min_lim, max_lim])   
 
-    def kickflip(self,dtheta_y):
-        """
-        anticlock
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(0)+' '+str(dtheta_y)+' '+str(0))
-
-        #####################
-        ax.set_title('Kickflip',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.y_anticlockwise(board_x,board_y,board_z,dtheta_y)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.y_anticlockwise(wheel_x,wheel_y,wheel_z,dtheta_y)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-
-        #####################
-        
-        self.post_trick(ax,board,wheels)
-
-    def heelflip(self,dtheta_y):
-        """
-        anticlock
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(0)+' '+str(dtheta_y)+' '+str(0))
-
-        #####################
-        ax.set_title('Heelflip',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.y_clockwise(board_x,board_y,board_z,dtheta_y)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.y_clockwise(wheel_x,wheel_y,wheel_z,dtheta_y)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-            
-        #####################
-
-        self.post_trick(ax,board,wheels)
-
-    def bs_360_shuv(self,dtheta_z):
-        """
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
-
-        #####################
-        ax.set_title('BS 360 Shuvit',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.z_clockwise(wheel_x,wheel_y,wheel_z,dtheta_z)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-            
-        #####################
-        self.post_trick(ax,board,wheels)	
-
-    def fs_360_shuv(self,dtheta_z):
-        """
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
-
-        #####################
-        ax.set_title('FS 360 Shuvit',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.z_anticlockwise(board_x,board_y,board_z,dtheta_z)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.z_anticlockwise(wheel_x,wheel_y,wheel_z,dtheta_z)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-
-        #####################
-        
-        self.post_trick(ax,board,wheels)
-
-    def front_foot_impossible(self,dtheta_x):
-        """
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(dtheta_x)+' '+str(0)+' '+str(0))
-    
-        #####################
-        ax.set_title('Front Foot Impossible',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.x_anticlockwise(board_x,board_y,board_z,dtheta_x)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.x_anticlockwise(wheel_x,wheel_y,wheel_z,dtheta_x)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-
-        #####################
-        
-        self.post_trick(ax,board,wheels)
-
-    def back_foot_impossible(self,dtheta_x):
-        """
-        """
-        ax    = self.pre_trick()
-        #ax.set_title(str(dtheta_x)+' '+str(0)+' '+str(0))
-
-        #####################
-        ax.set_title('Back Foot Impossible',fontsize=40)
-        board  = b.use_test_board()
-
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.x_clockwise(board_x,board_y,board_z,dtheta_x)
-        board = {'x':Bx,'y':By,'z':Bz}
-
-        wheels_ = b.use_test_wheels()
-        wheels = []
-
-        for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.x_clockwise(wheel_x,wheel_y,wheel_z,dtheta_x)
-            wheel = {'x':Wx,'y':Wy,'z':Wz}
-            wheels.append(wheel)
-            
-        #####################
-        self.post_trick(ax,board,wheels)    
-
-    # def treflip(self,dtheta_y,dtheta_z):
-    #     """
-    #     """
-    #     ax    = self.pre_trick()
-    #     #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
-
-    #     #####################
-    #     ax.set_title('Treflip')
-    #     board  = b.use_test_board()
-
-    #     board_x = board['x']
-    #     board_y = board['y']
-    #     board_z = board['z']
-    #     Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
-    #     Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
-
-    #     board = {'x':Bx,'y':By,'z':Bz}
-
-    #     wheels_ = b.use_test_wheels()
-    #     wheels = []
-
-    #     for wheel in wheels_:
-    #         wheel_x = wheel['x']
-    #         wheel_y = wheel['y']
-    #         wheel_z = wheel['z']
-    #         Wx,Wy,Wz = tf.z_clockwise(wheel_x,wheel_y,wheel_z,dtheta_z)
-    #         Wx,Wy,Wz = tf.y_clockwise(Wx,Wy,Wz,dtheta_y)
-    #         wheel = {'x':Wx,'y':Wy,'z':Wz}
-    #         wheels.append(wheel)
-            
-    #     #####################
-    #     self.post_trick(ax,board,wheels)    
-
-    # def lazerflip(self,dtheta_y,dtheta_z):
-    #     """
-    #     """
-    #     ax    = self.pre_trick()
-    #     #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
-
-    #     #####################
-    #     ax.set_title('Treflip')
-    #     board  = b.use_test_board()
-
-    #     board_x = board['x']
-    #     board_y = board['y']
-    #     board_z = board['z']
-    #     Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
-    #     Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
-
-    #     board = {'x':Bx,'y':By,'z':Bz}
-
-    #     wheels_ = b.use_test_wheels()
-    #     wheels = []
-
-    #     for wheel in wheels_:
-    #         wheel_x = wheel['x']
-    #         wheel_y = wheel['y']
-    #         wheel_z = wheel['z']
-    #         Wx,Wy,Wz = tf.z_clockwise(wheel_x,wheel_y,wheel_z,dtheta_z)
-    #         Wx,Wy,Wz = tf.y_clockwise(Wx,Wy,Wz,dtheta_y)
-    #         wheel = {'x':Wx,'y':Wy,'z':Wz}
-    #         wheels.append(wheel)
-            
-    #     #####################
-    #     self.post_trick(ax,board,wheels)    
+    ######################################################################################
 
     def customflip(self,name,dtheta_x,dtheta_y,dtheta_z):
         """
@@ -314,16 +84,32 @@ class PySkate():
 
         #####################
         ax.set_title(name,fontsize=40)
-        board  = b.use_test_board()
+        board_  = b.use_test_board()
+        board = []
 
-        board_x = board['x']
-        board_y = board['y']
-        board_z = board['z']
-        Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
-        Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
-        Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
+        for board_part in board_:
+            board_x = board_part['x']
+            board_y = board_part['y']
+            board_z = board_part['z']
+            Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
+            Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
+            Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
 
-        board = {'x':Bx,'y':By,'z':Bz}
+            board_part = {'x':Bx,'y':By,'z':Bz}
+            board.append(board_part)
+
+        trucks_ = b.use_test_trucks()
+        trucks = []
+
+        for trucks_part in trucks_:
+            truck_x = trucks_part['x']
+            truck_y = trucks_part['y']
+            truck_z = trucks_part['z']
+            Tx,Ty,Tz = tf.z_clockwise(truck_x,truck_y,truck_z,dtheta_z)
+            Tx,Ty,Tz = tf.y_clockwise(Tx,Ty,Tz,dtheta_y)
+            Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
+            truck_part = {'x':Tx,'y':Ty,'z':Tz}
+            trucks.append(truck_part)
 
         wheels_ = b.use_test_wheels()
         wheels = []
@@ -339,7 +125,9 @@ class PySkate():
             wheels.append(wheel)
             
         #####################
-        self.post_trick(ax,board,wheels)    
+        self.post_trick(ax,board,wheels,trucks)    
+
+    ######################################################################################
 
     def stationary(self):
         """
@@ -350,7 +138,8 @@ class PySkate():
         ax.set_title('stationary',fontsize=40)
         board = b.use_test_board()
         wheels = b.use_test_wheels()
-        self.post_trick(ax,board,wheels)
+        trucks = b.use_test_trucks()
+        self.post_trick(ax,board,wheels,trucks)
         plt.show()
 
 ################################################################################

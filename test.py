@@ -1,9 +1,9 @@
-# from skate import PySkate
-# s = PySkate()
+from skate import PySkate
+s = PySkate()
 
-# s.stationary()
+s.stationary()
 
-from animate import PyAnimate
-a = PyAnimate()
-#a.make_front_foot_impossible_gif()
-a.make_lazerflip_gif()
+# from animate import PyAnimate
+# a = PyAnimate()
+# # #a.make_front_foot_impossible_gif()
+# a.make_lazerflip_gif()

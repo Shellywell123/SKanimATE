@@ -37,13 +37,13 @@ class PyAnimate:
 
     def make_kickflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a kickflip
         """
-
+    
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames)):
+        for d_theta in list(np.linspace(0,-360,num_of_frames)):
 
-            self.sb.kickflip(d_theta)
+            self.sb.customflip('Kickflip',0,d_theta,0)
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -62,13 +62,13 @@ class PyAnimate:
 
     def make_heelflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a heelflip
         """
 
         i = 1
         for d_theta in list(np.linspace(0,360,num_of_frames)):
 
-            self.sb.heelflip(d_theta)
+            self.sb.customflip('Heelflip',0,d_theta,0)
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -88,13 +88,14 @@ class PyAnimate:
 
     def make_bs_360_shuv_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a bs 360 shuv
         """
 
         i = 1
         for d_theta in list(np.linspace(0,360,num_of_frames)):
 
-            self.sb.bs_360_shuv(d_theta)
+            self.sb.customflip('BS 360 Shuvit',0,0,d_theta)
+
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -114,13 +115,13 @@ class PyAnimate:
 
     def make_fs_360_shuv_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a fs 360 shuv
         """
 
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames)):
+        for d_theta in list(np.linspace(0,-360,num_of_frames)):
 
-            self.sb.fs_360_shuv(d_theta)
+            self.sb.customflip('FS 360 Shuvit',0,0,d_theta)
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -139,13 +140,13 @@ class PyAnimate:
 
     def make_front_foot_impossible_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a front foot impossible
         """
 
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames-1)):
+        for d_theta in list(np.linspace(0,-360,num_of_frames)):
 
-            self.sb.front_foot_impossible(d_theta)
+            self.sb.customflip('Front Foot Impossible',d_theta,0,0)
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -164,13 +165,13 @@ class PyAnimate:
     
     def make_back_foot_impossible_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a back foor impossible
         """
 
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames-1)):
+        for d_theta in list(np.linspace(0,360,num_of_frames)):
 
-            self.sb.back_foot_impossible(d_theta)
+            self.sb.customflip('Back Foot Impossible',d_theta,0,0)
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -190,7 +191,7 @@ class PyAnimate:
 
     def make_treflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a treflip
         """
 
         i = 1
@@ -219,7 +220,7 @@ class PyAnimate:
 
     def make_lazerflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a lazerflip
         """
 
         i = 1
@@ -248,7 +249,7 @@ class PyAnimate:
 
     def make_hardflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a hardflip
         """
 
         i = 1
@@ -277,7 +278,7 @@ class PyAnimate:
 
     def make_varial_kickflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of a varial kickflip
         """
 
         i = 1
@@ -306,7 +307,7 @@ class PyAnimate:
 
     def make_varial_heelflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif a varial heelflip
         """
 
         i = 1
@@ -334,7 +335,7 @@ class PyAnimate:
 
     def make_inward_heelflip_gif(self,num_of_frames=50):
         """
-        create a gif of the system spinning out radially
+        create a gif of an inward heelflip
         """
 
         i = 1
