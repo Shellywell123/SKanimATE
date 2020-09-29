@@ -302,7 +302,7 @@ class PyAnimate:
         """
 
         i = 1
-        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
+        d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
         d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
