@@ -51,9 +51,7 @@ class PyTransforms():
     def x_anticlockwise(self,x,y,z,theta):
         """
         """
-        theta = self.degrees_to_radians(theta)
-
-        X,Y,Z = self.z_clockwise(x,y,z,-theta)
+        X,Y,Z = self.x_clockwise(x,y,z,-theta)
 
         return X,Y,Z
 
