@@ -35,7 +35,7 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_kickflip_gif(self,num_of_frames=70):
+    def make_kickflip_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
@@ -60,7 +60,7 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_heelflip_gif(self,num_of_frames=70):
+    def make_heelflip_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
@@ -86,7 +86,7 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_bs_360_shuv_gif(self,num_of_frames=70):
+    def make_bs_360_shuv_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
@@ -112,7 +112,7 @@ class PyAnimate:
     ######################################################################################
 
 
-    def make_fs_360_shuv_gif(self,num_of_frames=70):
+    def make_fs_360_shuv_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
@@ -137,7 +137,7 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_front_foot_impossible_gif(self,num_of_frames=70):
+    def make_front_foot_impossible_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
@@ -162,7 +162,7 @@ class PyAnimate:
 
     ######################################################################################
     
-    def make_back_foot_impossible_gif(self,num_of_frames=70):
+    def make_back_foot_impossible_gif(self,num_of_frames=50):
         """
         create a gif of the system spinning out radially
         """
