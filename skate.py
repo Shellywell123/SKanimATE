@@ -46,7 +46,7 @@ class PySkate():
         """
         plot results of transformaition
         """
-        max_lim = 17
+        max_lim = 15
         min_lim = -max_lim
 
         if wheels:
@@ -72,12 +72,13 @@ class PySkate():
         
         ax.auto_scale_xyz([min_lim, max_lim],
                     [min_lim, max_lim], 
-                    [min_lim, max_lim])   
+                    [0, 2*max_lim])   
 
     ######################################################################################
 
-    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z):
+    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h):
         """
+        heavy duty function for computing a boards orientation
         """
         ax    = self.pre_trick()
         #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
@@ -88,12 +89,17 @@ class PySkate():
         board = []
 
         for board_part in board_:
-            board_x = board_part['x']
-            board_y = board_part['y']
-            board_z = board_part['z']
-            Bx,By,Bz = tf.z_clockwise(board_x,board_y,board_z,dtheta_z)
-            Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
-            Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
+            Bx = board_part['x']
+            By = board_part['y']
+            Bz = board_part['z']
+            if dtheta_y != 0:
+                Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
+            if dtheta_z != 0:
+                Bx,By,Bz = tf.z_clockwise(Bx,By,Bz,dtheta_z)
+            if dtheta_x != 0:
+                Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
+            if theta_h != 0:
+                Bx,By,Bz = tf.ollie_motion(Bx,By,Bz,theta_h)
 
             board_part = {'x':Bx,'y':By,'z':Bz}
             board.append(board_part)
@@ -102,12 +108,17 @@ class PySkate():
         trucks = []
 
         for trucks_part in trucks_:
-            truck_x = trucks_part['x']
-            truck_y = trucks_part['y']
-            truck_z = trucks_part['z']
-            Tx,Ty,Tz = tf.z_clockwise(truck_x,truck_y,truck_z,dtheta_z)
-            Tx,Ty,Tz = tf.y_clockwise(Tx,Ty,Tz,dtheta_y)
-            Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
+            Tx = trucks_part['x']
+            Ty = trucks_part['y']
+            Tz = trucks_part['z']
+            if dtheta_y != 0:
+                Tx,Ty,Tz = tf.y_clockwise(Tx,Ty,Tz,dtheta_y)
+            if dtheta_z != 0:
+                Tx,Ty,Tz = tf.z_clockwise(Tx,Ty,Tz,dtheta_z)
+            if dtheta_x != 0:
+                Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
+            if theta_h != 0:
+                Tx,Ty,Tz = tf.ollie_motion(Tx,Ty,Tz,theta_h)
             truck_part = {'x':Tx,'y':Ty,'z':Tz}
             trucks.append(truck_part)
 
@@ -115,16 +126,22 @@ class PySkate():
         wheels = []
 
         for wheel in wheels_:
-            wheel_x = wheel['x']
-            wheel_y = wheel['y']
-            wheel_z = wheel['z']
-            Wx,Wy,Wz = tf.z_clockwise(wheel_x,wheel_y,wheel_z,dtheta_z)
-            Wx,Wy,Wz = tf.y_clockwise(Wx,Wy,Wz,dtheta_y)
-            Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
+            Wx = wheel['x']
+            Wy = wheel['y']
+            Wz = wheel['z']
+            if dtheta_y != 0:
+                Wx,Wy,Wz = tf.y_clockwise(Wx,Wy,Wz,dtheta_y)
+            if dtheta_z != 0:
+                Wx,Wy,Wz = tf.z_clockwise(Wx,Wy,Wz,dtheta_z)
+            if dtheta_x != 0:
+                Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
+            if theta_h != 0:
+                Wx,Wy,Wz = tf.ollie_motion(Wx,Wy,Wz,theta_h)
             wheel = {'x':Wx,'y':Wy,'z':Wz}
             wheels.append(wheel)
             
         #####################
+
         self.post_trick(ax,board,wheels,trucks)    
 
     ######################################################################################

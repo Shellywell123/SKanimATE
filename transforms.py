@@ -82,6 +82,25 @@ class PyTransforms():
 
         return x,y,z
 
+    def ollie_motion(self,x,y,z,theta_h):
+        """
+        """
+        
+        max_ollie_height = 35
+        
+
+       # x,y,z=self.x_anticlockwise(x,y,z,theta_h)
+
+        theta_h = self.degrees_to_radians(theta_h)
+
+        current_hieght = max_ollie_height*np.sin(theta_h)
+
+        x = x
+        y = y 
+        z = z + current_hieght
+
+        return x,y,z
+
 ################################################################################
 # End of class
 ################################################################################

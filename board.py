@@ -12,8 +12,17 @@ class PyBoard:
         """
         class initaliser
         """
+        self.board_width  =8
+        self.board_mid_length =22
+        self.board_nose_tail_length = 5
 
-       # print('#'*55)
+        self.wheel_radius = 1
+        self.truck_height = 1
+
+        self.wheel_width    = 2
+        self.truck_width    = 6
+        self.truck_position = 18 #/board_length
+        self.axel_radius   = 0.2
        # print(' PyBoard initalised '+self.ss.get_live_time())
       #  print('#'*55)
 
@@ -23,27 +32,33 @@ class PyBoard:
         """
         """
 
-        board_width  = 8
-        board_mid_length = 22
-        board_nose_tail_length = 5
-
         board = []
 
-        x = np.arange(-board_width/2,board_width/2,0.5)
-        y = np.arange(0,board_nose_tail_length,1) + board_mid_length/2 -1
+        r = int(self.board_width  /2)
 
-        x,y = np.meshgrid(x,y)
+        u = np.linspace(0  , np.pi, 15)
+        r = np.linspace(0, r   ,2)
 
-        z =  y*0.5 - board_mid_length/4 + 1.5
+        u_inds = np.linspace(0, 15 - 1, 15).round().astype(int)
+        r_inds = np.linspace(0, 2 - 1, 15).round().astype(int)
+
+        u = u[u_inds]   
+        r = r[r_inds]
+
+        x = np.outer(r, np.cos(u))
+        y = np.outer(r, np.sin(u)) + self.board_mid_length/2
+
+        z =  y*0.5 - self.board_mid_length/4. +1
         z = z.reshape(x.shape)
+
 
         boardpart = {'x':x,'y':y,'z':z}
         board.append(boardpart)
 
         ##################
 
-        x = np.arange(-board_width/2,board_width/2,0.5)
-        y = np.arange(-board_mid_length/2,board_mid_length/2,1)
+        x = np.arange(-self.board_width  /2,(self.board_width  +1)/2,2)
+        y = np.arange(-self.board_mid_length/2,(self.board_mid_length+1)/2,1)
 
         x,y = np.meshgrid(x,y)
 
@@ -54,17 +69,26 @@ class PyBoard:
 
         ####################
 
-        x = np.arange(-board_width/2,board_width/2,0.5)
-        y = np.arange(-board_nose_tail_length,0,0.5)- board_mid_length/2 +0.5
+        r = int(self.board_width  /2)
 
-        x,y = np.meshgrid(x,y)
+        u = np.linspace(0  , -np.pi, 15)
+        r = np.linspace(0, r   ,2)
 
-        z =  -y*0.5-board_mid_length/4 +1
+        u_inds = np.linspace(0, 15 - 1, 15).round().astype(int)
+        r_inds = np.linspace(0, 2 - 1, 15).round().astype(int)
+
+        u = u[u_inds]   
+        r = r[r_inds]
+
+        x = np.outer(r, np.cos(u))
+        y = np.outer(r, np.sin(u)) - self.board_mid_length/2
+
+        z =  -y*0.5-self.board_mid_length/4 +1
         z = z.reshape(x.shape)
 
         boardpart = {'x':x,'y':y,'z':z}
-
         board.append(boardpart)
+
         ####################
 
         return board
@@ -75,24 +99,16 @@ class PyBoard:
         """
         """
 
-        wheel_radius = 1
-        truck_height = 1
-        board_width  = 8
-
-        wheel_width    = 2
-        truck_width    = 6
-        truck_position = 18 #/board_length
-
         wheels = []
         i = 1
-        for center_x in [-truck_width/2,truck_width/2]:
-            for center_y in [-truck_position/2,truck_position/2]:
+        for center_x in [-self.truck_width/2,self.truck_width/2]:
+            for center_y in [-self.truck_position/2,self.truck_position/2]:
 
-                x = np.linspace(-wheel_width/2, wheel_width/2, 50) + center_x
+                x = np.linspace(-self.wheel_width/2, self.wheel_width/2, 50) + center_x
                 theta = np.linspace(0, 2*np.pi, 50)
                 theta_grid, x_grid=np.meshgrid(theta, x)
-                z_grid = wheel_radius*np.cos(theta_grid) - truck_height
-                y_grid = wheel_radius*np.sin(theta_grid) + center_y
+                z_grid = self.wheel_radius*np.cos(theta_grid) - self.truck_height
+                y_grid = self.wheel_radius*np.sin(theta_grid) + center_y
 
                 wheel = {'x':x_grid,'y':y_grid,'z':z_grid}
                 wheels.append(wheel)
@@ -105,21 +121,15 @@ class PyBoard:
         """
         """
 
-        truck_height   = 1
-        truck_radius   = 0.2
-        wheel_width    = 2
-        truck_width    = 6
-        truck_position = 18 #/board_length
-
         trucks = []
         i = 1
-        for center_y in [-truck_position/2,truck_position/2]:
+        for center_y in [-self.truck_position/2,self.truck_position/2]:
 
-	        x = np.linspace(-truck_width/2, truck_width/2, 50) 
+	        x = np.linspace(-self.truck_width/2, self.truck_width/2, 50) 
 	        theta = np.linspace(0, 2*np.pi, 50)
 	        theta_grid, x_grid=np.meshgrid(theta, x)
-	        z_grid = truck_radius*np.cos(theta_grid) - truck_height
-	        y_grid = truck_radius*np.sin(theta_grid) + center_y
+	        z_grid = self.axel_radius*np.cos(theta_grid) - self.truck_height
+	        y_grid = self.axel_radius*np.sin(theta_grid) + center_y
 
 	        truck_axel = {'x':x_grid,'y':y_grid,'z':z_grid}
 	        trucks.append(truck_axel)

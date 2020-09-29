@@ -2,6 +2,12 @@
 
 Python3 project looking at simulation of skateboard tricks, by using cartesian rotation transformations as animated gifs.
 
+### Current Ollie Motion
+
+<p float="left">
+  <img src="Images/gifs/ollie.gif" width="400" />
+</p>
+
 ### Tricks with one dimension of rotation
 
 <p float="left">
