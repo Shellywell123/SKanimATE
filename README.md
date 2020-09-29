@@ -19,6 +19,21 @@ Python3 project looking at simulation of skateboard tricks, by using cartesian r
   <img src="Images/gifs/front_foot_impossible.gif" width="400" />
 </p>
 
+<p float="left">
+  <img src="Images/gifs/treflip.gif" width="400" />
+  <img src="Images/gifs/lazerflip.gif" width="400" />
+</p>
+
+<p float="left">
+  <img src="Images/gifs/hardflip.gif" width="400" />
+  <img src="Images/gifs/inward_heelflip.gif" width="400" />
+</p>
+
+<p float="left">
+  <img src="Images/gifs/varial_kickflip.gif" width="400" />
+  <img src="Images/gifs/varial_heelflip.gif" width="400" />
+</p>
+
 ### setup
 ```bash
 git clone https://github.com/Shellywell123/SKanimATE.git

@@ -73,8 +73,14 @@ class PyTransforms():
 
     def custom(self,x,y,z,theta_x,theta_y,theta_z):
         """
+        for multi dimensional rotations i.e tre flips
         """
-        pass
+
+        x,y,z = self.x_clockwise(x,y,z,theta_x)
+        x,y,z = self.y_clockwise(x,y,z,theta_y)
+        x,y,z = self.z_clockwise(x,y,z,theta_z)
+
+        return x,y,z
 
 ################################################################################
 # End of class

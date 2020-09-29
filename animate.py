@@ -143,7 +143,7 @@ class PyAnimate:
         """
 
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames)):
+        for d_theta in list(np.linspace(0,360,num_of_frames-1)):
 
             self.sb.front_foot_impossible(d_theta)
 
@@ -168,7 +168,7 @@ class PyAnimate:
         """
 
         i = 1
-        for d_theta in list(np.linspace(0,360,num_of_frames)):
+        for d_theta in list(np.linspace(0,360,num_of_frames-1)):
 
             self.sb.back_foot_impossible(d_theta)
 
@@ -184,6 +184,179 @@ class PyAnimate:
             print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
 
         self.frames_to_gif('back_foot_impossible')
+
+    ######################################################################################
+
+
+    def make_treflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(360,0,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,360,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Treflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('treflip')
+
+    ######################################################################################
+
+
+    def make_lazerflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,-360,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Lazerflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('lazerflip')
+
+    ######################################################################################
+
+
+    def make_hardflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Hardflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('hardflip')
+
+    ######################################################################################
+
+
+    def make_varial_kickflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Varial kickflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('varial_kickflip')
+
+   ######################################################################################
+
+
+    def make_varial_heelflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Varial Heelflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('varial_heelflip')
+   ######################################################################################
+
+
+    def make_inward_heelflip_gif(self,num_of_frames=50):
+        """
+        create a gif of the system spinning out radially
+        """
+
+        i = 1
+        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
+        d_theta_z = list(np.linspace(0,180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+
+            self.sb.customflip('Inward Heelflip',0,d_theta_y[i],d_theta_z[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('inward_heelflip')
 
 ################################################################################
 # End of class
