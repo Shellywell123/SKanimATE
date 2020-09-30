@@ -67,22 +67,23 @@ class PySkate():
                 x = wheel['x']
                 y = wheel['y']
                 z = wheel['z']
-                ax.plot_surface(x,y,z,zorder=1,alpha=1,color='lime')
+                ax.plot_surface(x,y,z,zorder=1,alpha=1,color='red')
 
         if trucks:
             for trucks_part in trucks:
                 x = trucks_part['x']
                 y = trucks_part['y']
                 z = trucks_part['z']
-                ax.plot_surface(x,y,z,zorder=2,alpha=1,color='blue')
+                ax.plot_surface(x,y,z,zorder=2,alpha=1,color='black')
 
         if board:
             for board_part in board:
                 x = board_part['x']
                 y = board_part['y']
                 z = board_part['z']
-                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='burlywood')
-              #  ax.plot_surface(x,y,z+1,zorder=3,alpha=1,color='black')
+                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='burlywood')             
+             #   ax.plot_surface(x,y,z+1,zorder=3,alpha=0.5,color='black')
+
 
         ax.auto_scale_xyz([min_lim, max_lim],
                     [min_lim, max_lim], 

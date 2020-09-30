@@ -86,7 +86,7 @@ class PyAnimate:
 
     def make_single_gif(self,trick_name,num_of_frames=25):
         """
-        create a gifs of all skate tricks
+        create a gifs of a skate trick
         """
         from data import PyData
         d = PyData(num_of_frames)

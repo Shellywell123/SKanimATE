@@ -18,7 +18,7 @@ class PyBoard:
         # truck dimensions
         self.truck_width    = 6
         self.truck_position = 18 #/board_length(32)
-        self.axel_radius    = 0.2
+        self.axel_radius    = 0.5
         self.truck_height   = 1
 
         # wheel dimensions
@@ -51,7 +51,7 @@ class PyBoard:
         y = np.outer(r, np.sin(u)) + self.board_mid_length/2
 
         z =  y*0.5 - self.board_mid_length/4. +1
-        z = z.reshape(x.shape)
+        z = z.reshape(x.shape)+self.wheel_radius
 
 
         boardpart = {'x':x,'y':y,'z':z}
@@ -64,7 +64,7 @@ class PyBoard:
 
         x,y = np.meshgrid(x,y)
 
-        z =  np.ones(x.shape)
+        z =  np.ones(x.shape)+self.wheel_radius
 
         boardpart = {'x':x,'y':y,'z':z}
         board.append(boardpart)
@@ -86,7 +86,7 @@ class PyBoard:
         y = np.outer(r, np.sin(u)) - self.board_mid_length/2
 
         z =  -y*0.5-self.board_mid_length/4 +1
-        z = z.reshape(x.shape)
+        z = z.reshape(x.shape)+self.wheel_radius
 
         boardpart = {'x':x,'y':y,'z':z}
         board.append(boardpart)
@@ -103,18 +103,38 @@ class PyBoard:
         """
 
         wheels = []
-        i = 1
         for center_x in [-self.truck_width/2,self.truck_width/2]:
             for center_y in [-self.truck_position/2,self.truck_position/2]:
 
                 x = np.linspace(-self.wheel_width/2, self.wheel_width/2, 50) + center_x
                 theta = np.linspace(0, 2*np.pi, 50)
                 theta_grid, x_grid=np.meshgrid(theta, x)
-                z_grid = self.wheel_radius*np.cos(theta_grid) - self.truck_height
+                z_grid = self.wheel_radius*np.cos(theta_grid) - self.truck_height +self.wheel_radius
                 y_grid = self.wheel_radius*np.sin(theta_grid) + center_y
 
                 wheel = {'x':x_grid,'y':y_grid,'z':z_grid}
                 wheels.append(wheel)
+
+
+        # wheel sides
+        for nose_or_tail in [+self.truck_position/2,-self.truck_position/2]:
+        	for left_or_right in [self.truck_width/2,-self.truck_width/2]:
+        		for inner_or_outer in [self.wheel_width/2,-self.wheel_width/2]:
+			        u = np.linspace(0  ,2* np.pi, 15)
+			        r = np.linspace(0, self.wheel_radius   ,2)
+
+			        u_inds = np.linspace(0, 15 - 1, 15).round().astype(int)
+			        r_inds = np.linspace(0, 2 - 1, 15).round().astype(int)
+
+			        u = u[u_inds]   
+			        r = r[r_inds]
+
+			        z = np.outer(r, np.cos(u))
+			        y = np.outer(r, np.sin(u)) + nose_or_tail
+			        x=np.zeros(y.shape)+left_or_right+inner_or_outer
+
+			        wheel = {'x':x,'y':y,'z':z}
+			        wheels.append(wheel)
 
         return wheels
 
@@ -132,7 +152,7 @@ class PyBoard:
 	        x = np.linspace(-self.truck_width/2, self.truck_width/2, 50) 
 	        theta = np.linspace(0, 2*np.pi, 50)
 	        theta_grid, x_grid=np.meshgrid(theta, x)
-	        z_grid = self.axel_radius*np.cos(theta_grid) - self.truck_height
+	        z_grid = self.axel_radius*np.cos(theta_grid) - self.truck_height+self.wheel_radius
 	        y_grid = self.axel_radius*np.sin(theta_grid) + center_y
 
 	        truck_axel = {'x':x_grid,'y':y_grid,'z':z_grid}
@@ -147,28 +167,28 @@ class PyBoard:
     	bolts development
     	"""
     	bolts = []
-    	bolt={'x' : 2, 'y':-1+self.truck_position/2,'z':1.5}
+    	bolt={'x' : 2, 'y':-1+self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : 2, 'y':1+self.truck_position/2,'z':1.5}
+    	bolt={'x' : 2, 'y':1+self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : -2, 'y':-1+self.truck_position/2,'z':1.5}
+    	bolt={'x' : -2, 'y':-1+self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : -2, 'y':1+self.truck_position/2,'z':1.5}
+    	bolt={'x' : -2, 'y':1+self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : 2, 'y':-1+-self.truck_position/2,'z':1.5}
+    	bolt={'x' : 2, 'y':-1+-self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : 2, 'y':1+-self.truck_position/2,'z':1.5}
+    	bolt={'x' : 2, 'y':1+-self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : -2, 'y':-1+-self.truck_position/2,'z':1.5}
+    	bolt={'x' : -2, 'y':-1+-self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
-    	bolt={'x' : -2, 'y':1+-self.truck_position/2,'z':1.5}
+    	bolt={'x' : -2, 'y':1+-self.truck_position/2,'z':1.5+self.wheel_radius}
     	bolts.append(bolt)
 
     	return bolts
