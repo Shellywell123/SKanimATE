@@ -1,4 +1,5 @@
-
+from transforms import PyTransforms
+tf = PyTransforms()
 import numpy as np
 
 ################################################################################
@@ -20,14 +21,51 @@ class PyData:
 
         #ollie/nollie motion
 
+        ########################################################################
+        # trick height calculations
+        ########################################################################
+
+        # height of trick
         self.d_theta_h  = list(np.linspace(0,180,self.num_of_frames))
-        self.d_theta_r1 = list(np.linspace(0,np.pi,25))
-        self.d_theta_r2 = [0]*(self.num_of_frames-len(self.d_theta_r1))
-        self.d_theta_r3 = self.d_theta_r1+self.d_theta_r2
+
+        ########################################################################
+        # lean angle of trick during pop to land
+        ########################################################################
+
+        # max angle of board at pop
+        self.pop_lean_max = 60
+
+        # bone lean angle
+        self.bone_angle = 20
+        # convert angle of bone as a percentage of pop lean max i.e 90 = 60
+        self.bone_angle_per = (self.bone_angle/self.pop_lean_max)*90
+        self.bone_angle_rad = tf.degrees_to_radians(self.bone_angle_per)
+
+        # frame of ollie arch peak
+        self.peak_frame     = int(0.5*self.num_of_frames)
+        self.stomp_duration = self.num_of_frames-self.peak_frame
+        
         self.d_theta_r  = []
 
-        for i in range(0,self.num_of_frames):
-            self.d_theta_r.append(60*np.sin(self.d_theta_r3[i]))
+        # pop to bone frames
+        self.board_angle1 = list(np.linspace(0,np.pi+self.bone_angle_rad,self.peak_frame))
+        for i in range(0,self.peak_frame):
+            self.d_theta_r.append(self.pop_lean_max*np.sin(self.board_angle1[i]))
+
+        # bone to land frames
+        self.board_angle2 = list(np.linspace(0,np.pi/2,self.stomp_duration))
+        for i in range(0,self.stomp_duration):
+            self.d_theta_r.append(-self.bone_angle_per*np.cos(self.board_angle2[i]))
+
+        ########################################################################
+        # flip : catch duration calculations
+        ########################################################################
+
+        self.frame_of_catch = int(0.6*self.num_of_frames)
+
+        ########################################################################
+        # flip data
+        ########################################################################
 
         self.explain_info = {
                 'trick name'   : 'explaination',
