@@ -178,6 +178,94 @@ class PySkate():
 
     ######################################################################################
 
+    def customnollieflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r):
+        """
+        heavy duty function for computing a boards orientation
+        """
+        ax    = self.pre_trick()
+        #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
+
+        #####################
+        ax.set_title(name,fontsize=40)
+        board_  = b.use_test_board()
+        board = []
+
+        for board_part in board_:
+            Bx = board_part['x']
+            By = board_part['y']
+            Bz = board_part['z']
+            if dtheta_y != 0:
+                Bx,By,Bz = tf.y_clockwise(Bx,By,Bz,dtheta_y)
+            if dtheta_z != 0:
+                Bx,By,Bz = tf.z_clockwise(Bx,By,Bz,dtheta_z)
+            if dtheta_x != 0:
+                Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
+            if theta_h != 0:
+                Bx,By,Bz = tf.nollie_motion(Bx,By,Bz,theta_h,theta_r)
+
+            board_part = {'x':Bx,'y':By,'z':Bz}
+            board.append(board_part)
+
+        # bolts_ = b.use_test_bolts()
+        # bolts = []
+
+        # for bolt in bolts_:
+        #     bx = bolt['x']
+        #     by = bolt['y']
+        #     bz = bolt['z']
+        #     if dtheta_y != 0:
+        #         bx,by,bz = tf.y_clockwise(bx,by,bz,dtheta_y)
+        #     if dtheta_z != 0:
+        #         bx,by,bz = tf.z_clockwise(bx,by,bz,dtheta_z)
+        #     if dtheta_x != 0:
+        #         bx,by,bz = tf.x_clockwise(bx,by,bz,dtheta_x)
+        #     if theta_h != 0:
+        #         bx,by,bz = tf.ollie_motion(bx,by,bz,theta_h,theta_r)
+        #     bolt = {'x':bx,'y':by,'z':bz}
+        #     bolts.append(bolt)
+
+        trucks_ = b.use_test_trucks()
+        trucks = []
+
+        for trucks_part in trucks_:
+            Tx = trucks_part['x']
+            Ty = trucks_part['y']
+            Tz = trucks_part['z']
+            if dtheta_y != 0:
+                Tx,Ty,Tz = tf.y_clockwise(Tx,Ty,Tz,dtheta_y)
+            if dtheta_z != 0:
+                Tx,Ty,Tz = tf.z_clockwise(Tx,Ty,Tz,dtheta_z)
+            if dtheta_x != 0:
+                Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
+            if theta_h != 0:
+                Tx,Ty,Tz = tf.nollie_motion(Tx,Ty,Tz,theta_h,theta_r)
+            truck_part = {'x':Tx,'y':Ty,'z':Tz}
+            trucks.append(truck_part)
+
+        wheels_ = b.use_test_wheels()
+        wheels = []
+
+        for wheel in wheels_:
+            Wx = wheel['x']
+            Wy = wheel['y']
+            Wz = wheel['z']
+            if dtheta_y != 0:
+                Wx,Wy,Wz = tf.y_clockwise(Wx,Wy,Wz,dtheta_y)
+            if dtheta_z != 0:
+                Wx,Wy,Wz = tf.z_clockwise(Wx,Wy,Wz,dtheta_z)
+            if dtheta_x != 0:
+                Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
+            if theta_h != 0:
+                Wx,Wy,Wz = tf.nollie_motion(Wx,Wy,Wz,theta_h,theta_r)
+            wheel = {'x':Wx,'y':Wy,'z':Wz}
+            wheels.append(wheel)
+            
+        #####################
+
+        self.post_trick(ax,board,wheels,trucks)    
+
+    ######################################################################################
+
     def stationary(self):
         """
         used for board development

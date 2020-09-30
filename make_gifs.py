@@ -2,6 +2,7 @@ from animate import PyAnimate
 a = PyAnimate()
 
 a.make_ollie_gif()
+a.make_nollie_gif()
 a.make_kickflip_gif()
 a.make_heelflip_gif()
 a.make_bs_360_shuv_gif()

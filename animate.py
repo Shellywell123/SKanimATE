@@ -41,8 +41,8 @@ class PyAnimate:
         """ 
         i = 1
 
-        d_theta_r1 = list(np.linspace(0,180,(num_of_frames+1)/2))
-        d_theta_r2 = list(np.zeros(num_of_frames-len(d_theta_r1)))
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
         d_theta_r3 = d_theta_r1+d_theta_r2
 
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
@@ -50,7 +50,7 @@ class PyAnimate:
         for i in range(1,num_of_frames+1):
             theta_r = 60*np.sin(d_theta_r3)
 
-            self.sb.customflip('Ollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r)
+            self.sb.customflip('Ollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -65,6 +65,38 @@ class PyAnimate:
 
         self.frames_to_gif('ollie')
 
+        ######################################################################################
+
+    def make_nollie_gif(self,num_of_frames=50):
+        """
+        """ 
+        i = 1
+
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
+
+        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
+
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+
+            self.sb.customnollieflip('Nollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
+
+            if i <= 9:
+                name_i = '0'+str(i)
+            else:
+                name_i = str(i)
+
+            save_name = 'Images/frames/{}.png'.format(name_i)
+            plt.savefig(save_name)
+            plt.clf()
+            i = i+1
+            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+        self.frames_to_gif('nollie')
+
+
     ######################################################################################
 
     def make_kickflip_gif(self,num_of_frames=50):
@@ -77,9 +109,15 @@ class PyAnimate:
         d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Kickflip',0,d_theta_y[i],0,theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+
+
+            self.sb.customflip('Kickflip',0,d_theta_y[i],0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
