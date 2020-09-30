@@ -17,7 +17,7 @@ class PyAnimate:
 
        # print('#'*55)
        # print(' PyAnimate initalised '+self.ss.get_live_time())
-      #  print('#'*55)
+       # print('#'*55)
 
     ######################################################################################
 
@@ -35,463 +35,54 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_ollie_gif(self,num_of_frames=50):
+    def make_all_gifs(self,num_of_frames=50):
         """
-        """ 
-        i = 1
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-
-            self.sb.customflip('Ollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('ollie')
-
-        ######################################################################################
-
-    def make_nollie_gif(self,num_of_frames=50):
+        create a gifs of all skate tricks
         """
-        """ 
-        i = 1
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-
-            self.sb.customnollieflip('Nollie',0,0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('nollie')
-
-    ######################################################################################
-
-    def make_kickflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a kickflip
-        """
-
-        i = 1
-
-        d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-
-            self.sb.customflip('Kickflip',0,d_theta_y[i],0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('kickflip')
-
-    ######################################################################################
-
-    def make_heelflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a heelflip
-        """
-
-        i = 1
-
-        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-
-            self.sb.customflip('Heelflip',0,d_theta_y[i],0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('heelflip')
-
-    ######################################################################################
-
-    def make_bs_360_shuv_gif(self,num_of_frames=50):
-        """
-        create a gif of a bs 360 shuv
-        """
-
-        i = 1
-
-        d_theta_z = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('BS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('bs_360_shuv')
-
-    ######################################################################################
-
-
-    def make_fs_360_shuv_gif(self,num_of_frames=50):
-        """
-        create a gif of a fs 360 shuv
-        """
-
-        i = 1
-
-        d_theta_z = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('FS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('fs_360_shuv')
-
-    ######################################################################################
-
-    def make_front_foot_impossible_gif(self,num_of_frames=50):
-        """
-        create a gif of a front foot impossible
-        """
-
-        i = 1
-        d_theta_x = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Front Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('front_foot_impossible')
-
-    ######################################################################################
-    
-    def make_back_foot_impossible_gif(self,num_of_frames=50):
-        """
-        create a gif of a back foor impossible
-        """
-
-        i = 1
-        d_theta_x = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Back Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('back_foot_impossible')
-
-    ######################################################################################
-
-    def make_treflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a treflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(360,0,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Treflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('treflip')
-
-    ######################################################################################
-
-    def make_lazerflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a lazerflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Lazerflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('lazerflip')
-
-    ######################################################################################
-
-    def make_hardflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a hardflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Hardflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('hardflip')
-
-    ######################################################################################
-
-    def make_varial_kickflip_gif(self,num_of_frames=50):
-        """
-        create a gif of a varial kickflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(0,-360,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,180,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Varial kickflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('varial_kickflip')
-
-   ######################################################################################
-
-    def make_varial_heelflip_gif(self,num_of_frames=50):
-        """
-        create a gif a varial heelflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Varial Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('varial_heelflip')
-
-   ######################################################################################
-
-    def make_inward_heelflip_gif(self,num_of_frames=50):
-        """
-        create a gif of an inward heelflip
-        """
-
-        i = 1
-        d_theta_y = list(np.linspace(0,360,num_of_frames+1))
-        d_theta_z = list(np.linspace(0,180,num_of_frames+1))
-        d_theta_h = list(np.linspace(0,180,num_of_frames+1))
-
-        d_theta_r1 = list(np.linspace(0,np.pi,25))
-        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
-        d_theta_r3 = d_theta_r1+d_theta_r2
-
-        for i in range(1,num_of_frames+1):
-            theta_r = 60*np.sin(d_theta_r3)
-            self.sb.customflip('Inward Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
-
-            if i <= 9:
-                name_i = '0'+str(i)
-            else:
-                name_i = str(i)
-
-            save_name = 'Images/frames/{}.png'.format(name_i)
-            plt.savefig(save_name)
-            plt.clf()
-            i = i+1
-            print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
-
-        self.frames_to_gif('inward_heelflip')
+        from data import PyData
+        d = PyData(num_of_frames)
+
+        for trick_info in d.trick_list:
+
+            trick_name = trick_info['trick name']
+            d_theta_x  = trick_info['x_rot_angles']
+            d_theta_y  = trick_info['y_rot_angles']
+            d_theta_z  = trick_info['z_rot_angles']
+            d_theta_h  = trick_info['h_rot_angles']
+            d_theta_r  = trick_info['r_rot_angles']
+
+          #  i = 1
+            for i in range(0,num_of_frames):
+
+                if trick_name[:6] == 'Nollie':
+                    self.sb.customnollieflip(
+                        name     = trick_name,
+                        dtheta_x = d_theta_x[i],
+                        dtheta_y = d_theta_y[i],
+                        dtheta_z = d_theta_z[i],
+                        theta_h  = d_theta_h[i],
+                        theta_r  = d_theta_r[i])
+                else:
+                    self.sb.customflip(
+                        name     = trick_name,
+                        dtheta_x = d_theta_x[i],
+                        dtheta_y = d_theta_y[i],
+                        dtheta_z = d_theta_z[i],
+                        theta_h  = d_theta_h[i],
+                        theta_r  = d_theta_r[i])
+
+                if i <= 8:
+                    name_i = '0'+str(i+1)
+                else:
+                    name_i = str(i+1)
+
+                save_name = 'Images/frames/{}.png'.format(name_i)
+                plt.savefig(save_name)
+                plt.clf()
+               # i = i+1
+                print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
+
+            self.frames_to_gif(trick_name)
 
 ################################################################################
 # End of class

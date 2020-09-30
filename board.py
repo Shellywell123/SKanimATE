@@ -1,5 +1,3 @@
-
-
 import numpy as np
 
 ################################################################################
@@ -34,6 +32,8 @@ class PyBoard:
         deck development
         """
 
+        # make nose
+
         board = []
 
         r = int(self.board_width  /2)
@@ -57,7 +57,7 @@ class PyBoard:
         boardpart = {'x':x,'y':y,'z':z}
         board.append(boardpart)
 
-        ##################
+        # make deck body
 
         x = np.arange(-self.board_width  /2,(self.board_width  +1)/2,2)
         y = np.arange(-self.board_mid_length/2,(self.board_mid_length+1)/2,self.board_mid_length)
@@ -69,7 +69,7 @@ class PyBoard:
         boardpart = {'x':x,'y':y,'z':z}
         board.append(boardpart)
 
-        ####################
+        # make tail
 
         r = int(self.board_width  /2)
 

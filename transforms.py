@@ -5,13 +5,22 @@ import numpy as np
 ################################################################################
 
 class PyTransforms():
-    
+    def __init__(self):
+       """
+       class initaliser
+       """
+       pass
+
+    ######################################################################################
+
     def degrees_to_radians(self,angle):
         """
         degrees to radians angle converter
         """
         angle = float(angle/180)*np.pi
         return angle
+
+    ######################################################################################
 
     def x_clockwise(self,x,y,z,theta):
         """
@@ -23,6 +32,8 @@ class PyTransforms():
         Z =  z*np.cos(theta)+y*np.sin(theta)
 
         return X,Y,Z
+
+    ######################################################################################
 
     def y_clockwise(self,x,y,z,theta):
         """
@@ -36,6 +47,8 @@ class PyTransforms():
 
         return X,Y,Z
 
+    ######################################################################################
+
     def z_clockwise(self,x,y,z,theta):
         """
         bs shuv
@@ -48,12 +61,16 @@ class PyTransforms():
 
         return X,Y,Z
 
+    ######################################################################################
+
     def x_anticlockwise(self,x,y,z,theta):
         """
         """
         X,Y,Z = self.x_clockwise(x,y,z,-theta)
 
         return X,Y,Z
+
+    ######################################################################################
 
     def y_anticlockwise(self,x,y,z,theta):
         """
@@ -63,6 +80,8 @@ class PyTransforms():
 
         return X,Y,Z
 
+    ######################################################################################
+
     def z_anticlockwise(self,x,y,z,theta):
         """
         fs shuv
@@ -70,6 +89,8 @@ class PyTransforms():
         X,Y,Z = self.z_clockwise(x,y,z,-theta)
 
         return X,Y,Z
+
+    ######################################################################################
 
     def custom(self,x,y,z,theta_x,theta_y,theta_z):
         """
@@ -82,8 +103,11 @@ class PyTransforms():
 
         return x,y,z
 
+    ######################################################################################
+
     def ollie_motion(self,x,y,z,theta_h,theta_r):
         """
+        transforms board orientation in an ollie motion
         """
 
         max_ollie_height = 35
@@ -100,18 +124,20 @@ class PyTransforms():
 
         return x,y,z
 
+    ######################################################################################
 
     def nollie_motion(self,x,y,z,theta_h,theta_r):
         """
+        transforms board orientation in an nollie motion
         """
 
-        max_ollie_height = 35
+        max_nollie_height = 35
 
         x,y,z=self.x_anticlockwise(x,y,z,theta_r)
 
         theta_h = self.degrees_to_radians(theta_h)
 
-        current_hieght = max_ollie_height*np.sin(theta_h)
+        current_hieght = max_nollie_height*np.sin(theta_h)
 
         x = x
         y = y 
