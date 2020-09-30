@@ -212,7 +212,7 @@ class PyData:
         self.nollie_hardflip_info = {
                 'trick name'   : 'Nollie Hardflip',
                 'x_rot_angles' : self.list_of_zeros,
-                'y_rot_angles' : list(np.linspace(0,360,self.num_of_frames)),
+                'y_rot_angles' : list(np.linspace(0,-360,self.num_of_frames)),
                 'z_rot_angles' : list(np.linspace(0,180,self.num_of_frames)),
                 'h_rot_angles' : self.d_theta_h,
                 'r_rot_angles' : self.d_theta_r
@@ -230,7 +230,7 @@ class PyData:
         self.nollie_inward_heelflip_info = {
                 'trick name'   : 'Nollie Inward Heelflip',
                 'x_rot_angles' : self.list_of_zeros,
-                'y_rot_angles' : list(np.linspace(0,-360,self.num_of_frames)),
+                'y_rot_angles' : list(np.linspace(0,360,self.num_of_frames)),
                 'z_rot_angles' : list(np.linspace(0,-180,self.num_of_frames)),
                 'h_rot_angles' : self.d_theta_h,
                 'r_rot_angles' : self.d_theta_r
@@ -282,7 +282,7 @@ class PyData:
                             self.nollie_BS_360_pop_shuvit_info,
                             self.FS_360_pop_shuvit_info,
                             self.nollie_FS_360_pop_shuvit_info,
-                            self.front_foot_impossible_info.
+                            self.front_foot_impossible_info,
                             self.nollie_front_foot_impossible_info,
                             self.back_foot_impossible_info,
                             self.nollie_back_foot_impossible_info,
