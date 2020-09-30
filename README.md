@@ -1,8 +1,8 @@
 # SKanimATE
 
-Python3 project looking at simulation of skateboard tricks, by using cartesian rotation transformations as animated gifs.
+Python3 project that focuses on the simulation of skateboard tricks,via cartesian rotation transformations as animated gifs.
 
-### Current Ollie Motion
+### Current Ollie/Nollie Motions
 
 <p float="left">
   <img src="Images/gifs/ollie.gif" width="400" />
@@ -56,4 +56,6 @@ GIFs will appear in `Images/gifs/`
 ### Features in development
 
  - skateboard shape
- - ollie motion (so the pop can be seen)
+ - ollie motion
+ - flip duration to catch time duration
+ - nollie flips to be added soon

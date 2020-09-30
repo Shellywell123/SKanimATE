@@ -33,7 +33,6 @@ class PyAnimate:
         imageio.mimsave(filename, images)
         print('{} made'.format(filename))
 
-
     ######################################################################################
 
     def make_ollie_gif(self,num_of_frames=50):
@@ -96,7 +95,6 @@ class PyAnimate:
 
         self.frames_to_gif('nollie')
 
-
     ######################################################################################
 
     def make_kickflip_gif(self,num_of_frames=50):
@@ -115,7 +113,6 @@ class PyAnimate:
 
         for i in range(1,num_of_frames+1):
             theta_r = 60*np.sin(d_theta_r3)
-
 
             self.sb.customflip('Kickflip',0,d_theta_y[i],0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
@@ -144,10 +141,14 @@ class PyAnimate:
         d_theta_y = list(np.linspace(0,360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
+
         for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
 
-
-            self.sb.customflip('Heelflip',0,d_theta_y[i],0,theta_h=d_theta_h[i])
+            self.sb.customflip('Heelflip',0,d_theta_y[i],0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -162,7 +163,6 @@ class PyAnimate:
 
         self.frames_to_gif('heelflip')
 
-
     ######################################################################################
 
     def make_bs_360_shuv_gif(self,num_of_frames=50):
@@ -175,9 +175,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('BS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('BS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
 
             if i <= 9:
@@ -206,9 +210,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,-360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('FS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('FS 360 Shuvit',0,0,d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -234,9 +242,13 @@ class PyAnimate:
         d_theta_x = list(np.linspace(0,-360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Front Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Front Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -262,9 +274,13 @@ class PyAnimate:
         d_theta_x = list(np.linspace(0,360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Back Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Back Foot Impossible',d_theta_x[i],0,0,theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -281,7 +297,6 @@ class PyAnimate:
 
     ######################################################################################
 
-
     def make_treflip_gif(self,num_of_frames=50):
         """
         create a gif of a treflip
@@ -292,9 +307,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Treflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Treflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -311,7 +330,6 @@ class PyAnimate:
 
     ######################################################################################
 
-
     def make_lazerflip_gif(self,num_of_frames=50):
         """
         create a gif of a lazerflip
@@ -322,9 +340,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,-360,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Lazerflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Lazerflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -341,7 +363,6 @@ class PyAnimate:
 
     ######################################################################################
 
-
     def make_hardflip_gif(self,num_of_frames=50):
         """
         create a gif of a hardflip
@@ -352,9 +373,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Hardflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Hardflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -371,7 +396,6 @@ class PyAnimate:
 
     ######################################################################################
 
-
     def make_varial_kickflip_gif(self,num_of_frames=50):
         """
         create a gif of a varial kickflip
@@ -382,9 +406,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,180,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Varial kickflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Varial kickflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -401,7 +429,6 @@ class PyAnimate:
 
    ######################################################################################
 
-
     def make_varial_heelflip_gif(self,num_of_frames=50):
         """
         create a gif a varial heelflip
@@ -412,9 +439,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,-180,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Varial Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Varial Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
@@ -428,8 +459,8 @@ class PyAnimate:
             print('Frame ({}/{}) Saved.'.format(name_i,num_of_frames))
 
         self.frames_to_gif('varial_heelflip')
-   ######################################################################################
 
+   ######################################################################################
 
     def make_inward_heelflip_gif(self,num_of_frames=50):
         """
@@ -441,9 +472,13 @@ class PyAnimate:
         d_theta_z = list(np.linspace(0,180,num_of_frames+1))
         d_theta_h = list(np.linspace(0,180,num_of_frames+1))
 
-        for i in range(1,num_of_frames+1):
+        d_theta_r1 = list(np.linspace(0,np.pi,25))
+        d_theta_r2 = [0] * (num_of_frames-len(d_theta_r1)+1)
+        d_theta_r3 = d_theta_r1+d_theta_r2
 
-            self.sb.customflip('Inward Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i])
+        for i in range(1,num_of_frames+1):
+            theta_r = 60*np.sin(d_theta_r3)
+            self.sb.customflip('Inward Heelflip',0,d_theta_y[i],d_theta_z[i],theta_h=d_theta_h[i],theta_r=theta_r[i])
 
             if i <= 9:
                 name_i = '0'+str(i)
