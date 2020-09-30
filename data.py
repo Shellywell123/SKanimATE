@@ -156,7 +156,7 @@ class PyData:
                 }
 
         self.nollie_front_foot_impossible_info = {
-                'trick name'   : 'Nolie Front Foot Impossible',
+                'trick name'   : 'Nollie Front Foot Impossible',
                 'x_rot_angles' : list(np.linspace(0,-360,self.num_of_frames)),
                 'y_rot_angles' : self.list_of_zeros,
                 'z_rot_angles' : self.list_of_zeros,
