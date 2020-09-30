@@ -35,7 +35,7 @@ class PyAnimate:
 
     ######################################################################################
 
-    def make_all_gifs(self,num_of_frames=50):
+    def make_all_gifs(self,num_of_frames=25):
         """
         create a gifs of all skate tricks
         """
@@ -84,7 +84,7 @@ class PyAnimate:
 
  ######################################################################################
 
-    def make_single_gif(self,trick_name,num_of_frames=50):
+    def make_single_gif(self,trick_name,num_of_frames=25):
         """
         create a gifs of all skate tricks
         """

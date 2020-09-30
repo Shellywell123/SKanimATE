@@ -4,4 +4,4 @@
 
 from animate import PyAnimate
 a = PyAnimate()
-a.make_single_gif('Treflip')
+a.make_single_gif('treflip')
