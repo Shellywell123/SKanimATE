@@ -2,14 +2,14 @@
 
 Python3 project that focuses on the simulation of flatground skateboard tricks, generated via rotatioal cartesian transformations in the form of animated gifs.
 
-### Base N/Ollie Motion
+### Base N/Ollie Motion:
 
 <p float="left">
   <img src="Images/gifs/Ollie.gif" width="400" />
   <img src="Images/gifs/Nollie.gif" width="400" />
 </p>
 
-### Tricks containing one rotational degree of freedom
+### Tricks containing one rotational degree of freedom:
 
 <p float="left">
   <img src="Images/gifs/Kickflip.gif" width="400" />
@@ -41,7 +41,7 @@ Python3 project that focuses on the simulation of flatground skateboard tricks, 
   <img src="Images/gifs/Nollie Front Foot Impossible.gif" width="400" />
 </p>
 
-### Tricks containing two rotational degrees of freedom
+### Tricks containing two rotational degrees of freedom:
 
 <p float="left">
   <img src="Images/gifs/Treflip.gif" width="400" />
@@ -73,7 +73,7 @@ Python3 project that focuses on the simulation of flatground skateboard tricks, 
   <img src="Images/gifs/Nollie Varial Heelflip.gif" width="400" />
 </p>
 
-### setup
+### Setup:
 ```bash
 git clone https://github.com/Shellywell123/SKanimATE.git
 ```
@@ -83,7 +83,7 @@ python3 make_gifs.py
 GIFs will appear in `Images/gifs/`
 (Tricks orientations are all animated with respect to Regular stance)
 
-### Features in continuous development
+### Features in continuous development:
 
  - skateboard component shapes
  - N/ollie motion
