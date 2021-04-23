@@ -145,6 +145,20 @@ class PyTransforms():
 
         return x,y,z
 
+    ######################################################################################
+
+    def cruise_motion(self,x,y,z,n):
+        """
+        will make gif shift along y axis at a rate of 5 units per frame
+        """
+        orgin_adjust = 7
+
+        x = x
+        y = y + (0.5*n) - orgin_adjust
+        z = z
+
+        return x,y,z
+
 ################################################################################
 # End of class
 ################################################################################

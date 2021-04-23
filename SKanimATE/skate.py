@@ -1,12 +1,14 @@
-from board import PyBoard
+
 import matplotlib
 matplotlib.use('TkAgg')
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-from transforms import PyTransforms
 import numpy as np
 import random
 import os
+
+from SKanimATE.board import PyBoard
+from SKanimATE.transforms import PyTransforms
 
 tf = PyTransforms()
 b = PyBoard()
@@ -33,16 +35,25 @@ class PySkate():
         load in components before tranformations happen
         """
         fig = plt.figure(0,figsize=[8,8])
-        ax = fig.add_subplot(111,projection='3d')
-      #  fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
+        # fig.subplots_adjust(left=0.0, right=1, bottom=0, top=1)
+        ax = fig.gca(projection='3d',azim=20,elev=10)
+        # ax.set_box_aspect(aspect = ((1,1,0.25)))
+        # fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+        # ax.set_xlabel('x')
+        # ax.set_ylabel('y')
+        # ax.set_zlabel('z')
 
-        ax.set_facecolor('white')
-        ax.w_xaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
-        ax.w_yaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
-        ax.w_zaxis.set_pane_color((0.4, 0.4, 0.4, 1.0))
+        # ax.set_facecolor('white')
+        # ax.w_xaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
+        # ax.w_yaxis.set_pane_color((1.0, 1.0, 1.0, 1.0))
+        # ax.w_zaxis.set_pane_color((0.4, 0.4, 0.4, 1.0))
+        # ax.pbaspect = [1,1,0.25]
+
+        # ax.set_xlim(-15,15)
+        # ax.set_ylim(0,200)
+        # ax.set_zlim(0,30)
+        ax.set_axis_off()
+        #plt.tight_layout()
 
         return ax
 
@@ -54,6 +65,13 @@ class PySkate():
         """
         max_lim = 15
         min_lim = -max_lim
+
+        if board:
+            for board_part in board:
+                x = board_part['x']
+                y = board_part['y']
+                z = board_part['z']
+                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='burlywood') 
 
         if bolts:
             for bolt in bolts:
@@ -74,14 +92,9 @@ class PySkate():
                 x = trucks_part['x']
                 y = trucks_part['y']
                 z = trucks_part['z']
-                ax.plot_surface(x,y,z,zorder=2,alpha=1,color='black')
+                ax.plot_surface(x,y,z,zorder=2,alpha=1,color='lightsteelblue')
 
-        if board:
-            for board_part in board:
-                x = board_part['x']
-                y = board_part['y']
-                z = board_part['z']
-                ax.plot_surface(x,y,z,zorder=3,alpha=1,color='burlywood')             
+            
              #   ax.plot_surface(x,y,z+1,zorder=3,alpha=0.5,color='black')
 
 
@@ -91,7 +104,7 @@ class PySkate():
 
     ######################################################################################
 
-    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r):
+    def customflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r,n):
         """
         heavy duty function for computing a boards orientation
         """
@@ -99,7 +112,7 @@ class PySkate():
         #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
 
         #####################
-        ax.set_title(name,fontsize=40)
+        ax.set_title(name,fontsize=30,color='r',backgroundcolor='dimgray')
         board_  = b.use_test_board()
         board = []
 
@@ -115,6 +128,9 @@ class PySkate():
                 Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
             if theta_h != 0:
                 Bx,By,Bz = tf.ollie_motion(Bx,By,Bz,theta_h,theta_r)
+
+            # make trick no stationary
+            Bx,By,Bz = tf.cruise_motion(Bx,By,Bz,n)
 
             board_part = {'x':Bx,'y':By,'z':Bz}
             board.append(board_part)
@@ -152,8 +168,14 @@ class PySkate():
                 Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
             if theta_h != 0:
                 Tx,Ty,Tz = tf.ollie_motion(Tx,Ty,Tz,theta_h,theta_r)
+
+            # make trick no stationary
+            Tx,Ty,Tz = tf.cruise_motion(Tx,Ty,Tz,n)
+
             truck_part = {'x':Tx,'y':Ty,'z':Tz}
             trucks.append(truck_part)
+
+
 
         wheels_ = b.use_test_wheels()
         wheels = []
@@ -170,16 +192,30 @@ class PySkate():
                 Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
             if theta_h != 0:
                 Wx,Wy,Wz = tf.ollie_motion(Wx,Wy,Wz,theta_h,theta_r)
+
+            # make trick no stationary
+            Wx,Wy,Wz = tf.cruise_motion(Wx,Wy,Wz,n)
+
             wheel = {'x':Wx,'y':Wy,'z':Wz}
             wheels.append(wheel)
             
+        #####################
+
+        for y in range(-50,60):
+            ax.plot([-15,15],[y-n,y-n],[0,0], linewidth=10,c='dimgray') 
+            if y%2==0:
+                col='darkgray'
+            else:
+                col='k'
+            ax.plot([-15,15],[y-n+0.5,y-n+0.5],[0,0], linewidth=10,c=col) 
+
         #####################
 
         self.post_trick(ax,board,wheels,trucks)    
 
     ######################################################################################
 
-    def customnollieflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r):
+    def customnollieflip(self,name,dtheta_x,dtheta_y,dtheta_z,theta_h,theta_r,n):
         """
         heavy duty function for computing a boards orientation
         """
@@ -187,7 +223,7 @@ class PySkate():
         #ax.set_title(str(0)+' '+str(0)+' '+str(dtheta_z))
 
         #####################
-        ax.set_title(name,fontsize=40)
+        ax.set_title(name,fontsize=30,color='r',backgroundcolor='dimgray')
         board_  = b.use_test_board()
         board = []
 
@@ -203,6 +239,9 @@ class PySkate():
                 Bx,By,Bz = tf.x_clockwise(Bx,By,Bz,dtheta_x)
             if theta_h != 0:
                 Bx,By,Bz = tf.nollie_motion(Bx,By,Bz,theta_h,theta_r)
+
+        # make trick no stationary
+            Bx,By,Bz = tf.cruise_motion(Bx,By,Bz,n)
 
             board_part = {'x':Bx,'y':By,'z':Bz}
             board.append(board_part)
@@ -240,6 +279,10 @@ class PySkate():
                 Tx,Ty,Tz = tf.x_clockwise(Tx,Ty,Tz,dtheta_x)
             if theta_h != 0:
                 Tx,Ty,Tz = tf.nollie_motion(Tx,Ty,Tz,theta_h,theta_r)
+
+        # make trick no stationary
+            Tx,Ty,Tz = tf.cruise_motion(Tx,Ty,Tz,n)
+
             truck_part = {'x':Tx,'y':Ty,'z':Tz}
             trucks.append(truck_part)
 
@@ -258,16 +301,31 @@ class PySkate():
                 Wx,Wy,Wz = tf.x_clockwise(Wx,Wy,Wz,dtheta_x)
             if theta_h != 0:
                 Wx,Wy,Wz = tf.nollie_motion(Wx,Wy,Wz,theta_h,theta_r)
+
+        # make trick no stationary
+            Wx,Wy,Wz = tf.cruise_motion(Wx,Wy,Wz,n)
+            
             wheel = {'x':Wx,'y':Wy,'z':Wz}
             wheels.append(wheel)
+
             
+        #####################
+
+        for y in range(-50,60):
+            ax.plot([-15,15],[y-n,y-n],[0,0], linewidth=10,c='dimgray') 
+            if y%2==0:
+                col='darkgray'
+            else:
+                col='k'
+            ax.plot([-15,15],[y-n+0.5,y-n+0.5],[0,0], linewidth=10,c=col) 
+
         #####################
 
         self.post_trick(ax,board,wheels,trucks)    
 
-    ######################################################################################
+      ######################################################################################
 
-    def stationary(self):
+    def no_trick(self):
         """
         used for board development
         """

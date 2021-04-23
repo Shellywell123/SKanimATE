@@ -1,4 +1,4 @@
-from transforms import PyTransforms
+from SKanimATE.transforms import PyTransforms
 tf = PyTransforms()
 import numpy as np
 
@@ -76,7 +76,7 @@ class PyData:
         # flip : catch duration calculations
         ########################################################################
 
-        self.frame_of_catch = int(0.75*self.num_of_frames)
+        self.frame_of_catch = int(0.6*self.num_of_frames)
         self.post_catch     = self.num_of_frames = self.frame_of_catch
         self.catch_and_land = [0]*self.post_catch
 

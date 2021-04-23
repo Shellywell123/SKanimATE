@@ -1,15 +1,15 @@
 # SKanimATE
 
-Python3 project that focuses on the simulation of skateboard tricks,via cartesian rotation transformations as animated gifs.
+Python3 project that focuses on the simulation of flatground skateboard tricks, generated via rotatioal cartesian transformations in the form of animated gifs.
 
-### Base Ollie/Nollie Motions
+### Base N/Ollie Motion
 
 <p float="left">
   <img src="Images/gifs/Ollie.gif" width="400" />
   <img src="Images/gifs/Nollie.gif" width="400" />
 </p>
 
-### Tricks with one dimension of rotation
+### Tricks containing one rotational degree of freedom
 
 <p float="left">
   <img src="Images/gifs/Kickflip.gif" width="400" />
@@ -41,7 +41,7 @@ Python3 project that focuses on the simulation of skateboard tricks,via cartesia
   <img src="Images/gifs/Nollie Front Foot Impossible.gif" width="400" />
 </p>
 
-### Tricks with two dimension of rotation
+### Tricks containing two rotational degrees of freedom
 
 <p float="left">
   <img src="Images/gifs/Treflip.gif" width="400" />
@@ -81,11 +81,13 @@ git clone https://github.com/Shellywell123/SKanimATE.git
 python3 make_gifs.py
 ```
 GIFs will appear in `Images/gifs/`
-(Tricks orientations are with respect to Regular stance)
+(Tricks orientations are all animated with respect to Regular stance)
 
 ### Features in continuous development
 
- - skateboard shape
- - ollie motion
+ - skateboard component shapes
+ - N/ollie motion
  - flip duration to catch time duration
- 
+ - rendering of model parts overlapping incorrectly, may move from matplotlib to mayavi
+ - want to animate shoes to better illustrate stance
+ - goofy/switch/fakie to be added
